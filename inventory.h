@@ -11,33 +11,33 @@
 #include <iostream>
 #include "Utilities.h"
 
-// Avoid `using namespace std;` in headers to prevent symbol pollution in consumers
+using namespace std;
 
 // ===== InventoryItem Class =====
 // Represents a single item in the warehouse inventory
 
 class InventoryItem {
 private:
-    std::string itemID;           // Unique item identifier (e.g., ITM001)
-    std::string itemName;         // Name of the item
-    std::string category;         // Category (e.g., Electronics, Parts)
+    string itemID;           // Unique item identifier (e.g., ITM001)
+    string itemName;         // Name of the item
+    string category;         // Category (e.g., Electronics, Parts)
     int quantity;            // Current stock quantity
     int reorderLevel;        // Minimum quantity before alert
     double unitPrice;        // Price per unit
-    std::string entryDate;        // Date when item was added
+    string entryDate;        // Date when item was added
 
 public:
     // Constructor
     InventoryItem();
     
     // ===== Getters =====
-    std::string getItemID() const { return itemID; }
-    std::string getItemName() const { return itemName; }
-    std::string getCategory() const { return category; }
+    string getItemID() const { return itemID; }
+    string getItemName() const { return itemName; }
+    string getCategory() const { return category; }
     int getQuantity() const { return quantity; }
     int getReorderLevel() const { return reorderLevel; }
     double getUnitPrice() const { return unitPrice; }
-    std::string getEntryDate() const { return entryDate; }
+    string getEntryDate() const { return entryDate; }
     
     // Calculate total value of this item (quantity * unitPrice)
     double getTotalValue() const { return quantity * unitPrice; }
@@ -46,22 +46,22 @@ public:
     bool isLowStock() const { return quantity <= reorderLevel; }
     
     // ===== Setters =====
-    void setItemID(const std::string& id) { itemID = id; }
-    void setItemName(const std::string& name) { itemName = name; }
-    void setCategory(const std::string& cat) { category = cat; }
+    void setItemID(const string& id) { itemID = id; }
+    void setItemName(const string& name) { itemName = name; }
+    void setCategory(const string& cat) { category = cat; }
     void setQuantity(int qty) { quantity = qty; }
     void setReorderLevel(int level) { reorderLevel = level; }
     void setUnitPrice(double price) { unitPrice = price; }
-    void setEntryDate(const std::string& date) { entryDate = date; }
+    void setEntryDate(const string& date) { entryDate = date; }
     
     // Display item in table format
     void display() const;
     
     // Convert item to file format (for saving)
-    std::string toFileString() const;
+    string toFileString() const;
     
     // Parse item from file format (for loading)
-    void fromFileString(const std::string& data);
+    void fromFileString(const string& data);
 };
 
 
@@ -70,17 +70,17 @@ public:
 
 class InventoryManager {
 private:
-    std::vector<InventoryItem> items;        // Container for all items
-    std::string inventoryFile;               // Filename for persistent storage
+    vector<InventoryItem> items;        // Container for all items
+    string inventoryFile;               // Filename for persistent storage
     
     // Private helper functions
     void loadInventory();               // Load items from file
     void saveInventory();               // Save items to file
-    InventoryItem* findItemByID(const std::string& id);  // Search by ID
+    InventoryItem* findItemByID(const string& id);  // Search by ID
     
 public:
     // Constructor and Destructor
-    InventoryManager(const std::string& filename = "inventory.txt");
+    InventoryManager(const string& filename = "inventory.txt");
     ~InventoryManager();
     
     // ===== CRUD Operations =====
@@ -106,7 +106,7 @@ public:
     // ===== Getters for other modules =====
     
     // Get all items (used by Report and Alert modules)
-    const std::vector<InventoryItem>& getAllItems() const { return items; }
+    const vector<InventoryItem>& getAllItems() const { return items; }
     
     // Get total number of items
     int getTotalItemsCount() const { return items.size(); }
@@ -115,7 +115,7 @@ public:
     double getTotalInventoryValue() const;
     
     // Get a specific item by ID (for reports)
-    const InventoryItem* getItemByID(const std::string& id) const;
+    const InventoryItem* getItemByID(const string& id) const;
 };
 
 #endif // INVENTORY_H
