@@ -12,7 +12,7 @@
 #include "Inventory.h"
 #include "Utilities.h"
 
-// Avoid `using namespace std;` in headers to prevent symbol pollution in consumers
+using namespace std;
 
 // ===== LowStockAlert Class =====
 // Manages low stock monitoring and alerts
@@ -38,7 +38,7 @@ public:
     void checkLowStockItemsWithThreshold(int threshold);
     
     // Get list of low stock items
-    std::vector<InventoryItem> getLowStockItems(int threshold = -1) const;
+    vector<InventoryItem> getLowStockItems(int threshold = -1) const;
     
     // Set default threshold
     void setDefaultThreshold(int threshold) { defaultThreshold = threshold; }

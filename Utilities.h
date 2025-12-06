@@ -12,52 +12,55 @@
 #include <iomanip>
 #include <algorithm>
 #include <cctype>
+#include <iostream>
+
+using namespace std;
 
 // ===== Utility Functions =====
 
 // Get current date in YYYY-MM-DD format
-inline std::string getCurrentDate() {
+inline string getCurrentDate() {
     time_t now = time(0);
     tm* ltm = localtime(&now);
     
-    std::stringstream ss;
+    stringstream ss;
     ss << 1900 + ltm->tm_year << "-" 
-       << std::setw(2) << std::setfill('0') << 1 + ltm->tm_mon << "-"
-       << std::setw(2) << std::setfill('0') << ltm->tm_mday;
+       << setw(2) << setfill('0') << 1 + ltm->tm_mon << "-"
+       << setw(2) << setfill('0') << ltm->tm_mday;
     return ss.str();
 }
 
 // Get current date and time in YYYY-MM-DD HH:MM:SS format
-inline std::string getCurrentDateTime() {
+inline string getCurrentDateTime() {
     time_t now = time(0);
     tm* ltm = localtime(&now);
     
-    std::stringstream ss;
+    stringstream ss;
     ss << 1900 + ltm->tm_year << "-" 
-       << std::setw(2) << std::setfill('0') << 1 + ltm->tm_mon << "-"
-       << std::setw(2) << std::setfill('0') << ltm->tm_mday << " "
-       << std::setw(2) << std::setfill('0') << ltm->tm_hour << ":"
-       << std::setw(2) << std::setfill('0') << ltm->tm_min << ":"
-       << std::setw(2) << std::setfill('0') << ltm->tm_sec;
+       << setw(2) << setfill('0') << 1 + ltm->tm_mon << "-"
+       << setw(2) << setfill('0') << ltm->tm_mday << " "
+       << setw(2) << setfill('0') << ltm->tm_hour << ":"
+       << setw(2) << setfill('0') << ltm->tm_min << ":"
+       << setw(2) << setfill('0') << ltm->tm_sec;
     return ss.str();
 }
 
 // Convert string to lowercase
-inline std::string toLower(const std::string& str) {
-    std::string result = str;
-    std::transform(result.begin(), result.end(), result.begin(), ::tolower);
+inline string toLower(const string& str) {
+    string result = str;
+    transform(result.begin(), result.end(), result.begin(), ::tolower);
     return result;
 }
 
 // Print a separator line
 inline void printSeparator(int width = 70) {
-    std::cout << std::string(width, '=') << "\n";
+    cout << string(width, '=') << "\n";
 }
 
 // Print a section header
-inline void printHeader(const std::string& title) {
+inline void printHeader(const string& title) {
     printSeparator();
-    std::cout << "  " << title << "\n";
+    cout << "  " << title << "\n";
     printSeparator();
 }
 

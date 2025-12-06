@@ -13,7 +13,7 @@
 #include "Inventory.h"
 #include "Utilities.h"
 
-// Avoid `using namespace std;` in headers to prevent symbol pollution in consumers
+using namespace std;
 
 // ===== ReportWriter Class =====
 // Handles all report generation tasks
@@ -21,14 +21,14 @@
 class ReportWriter {
 private:
     const InventoryManager& inventoryManager;  // Reference to inventory
-    std::string reportDir;                     // Directory to save reports
+    string reportDir;                          // Directory to save reports
     
     // Private helper: Generate filename with timestamp
-    std::string generateReportFilename(const std::string& reportType);
+    string generateReportFilename(const string& reportType);
 
 public:
     // Constructor
-    ReportWriter(const InventoryManager& manager, const std::string& dir = "Reports/");
+    ReportWriter(const InventoryManager& manager, const string& dir = "Reports/");
     
     // ===== Report Generation Methods =====
     
