@@ -1,0 +1,320 @@
+/*
+    COMPILATION & BUILD GUIDE
+    Warehouse Inventory Management System
+*/
+
+============================================================================
+                        BUILD INSTRUCTIONS
+============================================================================
+
+PROJECT STRUCTURE:
+├── main.cpp                   # Main program (CRUD menu)
+├── Inventory.h / Inventory.cpp        # Core inventory system
+├── ReportWriter.h / ReportWriter.cpp  # Report generation
+├── LowStockAlert.h / LowStockAlert.cpp# Stock alerts
+├── TransactionLogger.h / TransactionLogger.cpp  # Logging
+├── Utilities.h                # Utility functions
+└── README.md                  # Documentation
+
+============================================================================
+                    QUICK COMPILATION (Windows)
+============================================================================
+
+Using GCC (MSYS2 / MinGW):
+
+METHOD 1: Single Command Compilation
+-----------------------------------
+cd "C:\Users\dcark\OneDrive\Desktop\C++ project"
+g++ -std=c++11 -o inventory.exe main.cpp Inventory.cpp ReportWriter.cpp LowStockAlert.cpp TransactionLogger.cpp
+
+Then run:
+inventory.exe
+
+---
+
+METHOD 2: Step-by-Step Compilation
+-----------------------------------
+cd "C:\Users\dcark\OneDrive\Desktop\C++ project"
+
+# Compile each .cpp to object files
+g++ -c -std=c++11 Inventory.cpp
+g++ -c -std=c++11 ReportWriter.cpp
+g++ -c -std=c++11 LowStockAlert.cpp
+g++ -c -std=c++11 TransactionLogger.cpp
+
+# Link main.cpp with all object files
+g++ -std=c++11 -o inventory.exe main.cpp Inventory.o ReportWriter.o LowStockAlert.o TransactionLogger.o
+
+Then run:
+inventory.exe
+
+---
+
+METHOD 3: Using VS Code Build Task
+-----------------------------------
+The project includes a build task for VS Code.
+Simply press Ctrl+Shift+B to compile automatically.
+
+============================================================================
+                    DETAILED COMPILATION STEPS
+============================================================================
+
+STEP 1: Verify Files
+--------------------
+Make sure these files exist in your directory:
+✓ main.cpp
+✓ Inventory.h, Inventory.cpp
+✓ ReportWriter.h, ReportWriter.cpp
+✓ LowStockAlert.h, LowStockAlert.cpp
+✓ TransactionLogger.h, TransactionLogger.cpp
+✓ Utilities.h
+
+STEP 2: Open Terminal/Command Prompt
+-------------------------------------
+- Windows: cmd.exe or PowerShell
+- Path: C:\Users\dcark\OneDrive\Desktop\C++ project
+
+STEP 3: Run Compilation Command
+--------------------------------
+g++ -std=c++11 -o inventory.exe main.cpp Inventory.cpp ReportWriter.cpp LowStockAlert.cpp TransactionLogger.cpp
+
+Expected output: 
+- Creates inventory.exe (usually ~100-200 KB)
+- No error messages (warnings are OK)
+
+STEP 4: Run the Program
+-----------------------
+.\inventory.exe
+
+Expected output:
+╔════════════════════════════════════════════════════════════════╗
+║     WAREHOUSE INVENTORY MANAGEMENT SYSTEM (v1.0)              ║
+║     College Project - Well-structured Modular Design          ║
+╚════════════════════════════════════════════════════════════════╝
+
+System initialized successfully!
+Inventory file: inventory.txt
+Transaction log: transactions.txt
+Reports directory: Reports/
+
+WAREHOUSE INVENTORY MANAGEMENT SYSTEM - MAIN MENU
+======================================================================
+  ===== INVENTORY OPERATIONS (CRUD) =====
+  1. Add New Item
+  2. View All Items
+  ...
+
+============================================================================
+                        TROUBLESHOOTING
+============================================================================
+
+ERROR: "g++ is not recognized as an internal or external command"
+------
+Solution: 
+1. Install GCC (MinGW/MSYS2)
+2. Add GCC to Windows PATH
+3. Verify: Open cmd and type "g++ --version"
+
+---
+
+ERROR: "No such file or directory: Inventory.cpp"
+------
+Solution:
+1. Ensure you're in the correct directory
+2. Verify file names (case-sensitive on some systems)
+3. Use full path: g++ -std=c++11 -o inventory.exe "C:\...\main.cpp" ...
+
+---
+
+ERROR: Compilation errors with "-std=c++11"
+------
+Solution:
+1. Try newer standard: -std=c++14 or -std=c++17
+2. Verify GCC version: g++ --version
+3. Update GCC if outdated
+
+---
+
+ERROR: "inventory.exe not found" after compilation
+------
+Solution:
+1. Check if compilation succeeded (no error messages)
+2. Look for inventory.exe in current directory
+3. Try with explicit path: .\inventory.exe
+
+---
+
+ERROR: "File inventory.txt already in use"
+------
+Solution:
+1. Close any running instances of inventory.exe
+2. Restart the program
+3. If it persists, check Windows Task Manager
+
+============================================================================
+                        RUNNING THE PROGRAM
+============================================================================
+
+WINDOWS Command Prompt/PowerShell:
+-----------------------------------
+cd "C:\Users\dcark\OneDrive\Desktop\C++ project"
+.\inventory.exe
+
+VS Code Terminal:
+-------------------
+Press Ctrl+` to open integrated terminal
+Then type: .\inventory.exe
+
+Direct Execution:
+------------------
+Double-click inventory.exe in Windows Explorer
+
+============================================================================
+                    COMPILATION FLAGS EXPLAINED
+============================================================================
+
+-std=c++11      Use C++11 standard (recommended for compatibility)
+-std=c++14      Use C++14 standard (newer features)
+-std=c++17      Use C++17 standard (latest features)
+
+-o filename     Output executable name
+-c              Compile only (create .o object files)
+-Wall           Show all warnings
+-g              Include debug information
+
+Example with flags:
+g++ -std=c++11 -Wall -g -o inventory.exe main.cpp Inventory.cpp ReportWriter.cpp LowStockAlert.cpp TransactionLogger.cpp
+
+============================================================================
+                        DATA FILES CREATED
+============================================================================
+
+When you run the program, it creates:
+
+1. inventory.txt
+   - Stores all inventory items
+   - Format: ID|Name|Category|Qty|Date|ReorderLevel|Price
+   - Auto-created on first run
+
+2. transactions.txt
+   - Stores transaction history
+   - Format: TxnID|Timestamp|Type|ItemID|Name|Qty|Description
+   - Auto-created on first run
+
+3. Reports/ (Directory)
+   - Created when you generate reports
+   - Contains timestamped report files
+   - Created automatically if missing
+
+============================================================================
+                    CLEAN BUILD (Remove Old Files)
+============================================================================
+
+Windows PowerShell:
+-------------------
+cd "C:\Users\dcark\OneDrive\Desktop\C++ project"
+Remove-Item *.o -Force            # Remove object files
+Remove-Item inventory.exe -Force  # Remove executable
+Remove-Item inventory.txt -Force  # Remove old data (optional)
+
+Then recompile:
+g++ -std=c++11 -o inventory.exe main.cpp Inventory.cpp ReportWriter.cpp LowStockAlert.cpp TransactionLogger.cpp
+
+============================================================================
+                    ADVANCED COMPILATION OPTIONS
+============================================================================
+
+Optimized Build:
+----------------
+g++ -O2 -std=c++11 -o inventory.exe main.cpp Inventory.cpp ReportWriter.cpp LowStockAlert.cpp TransactionLogger.cpp
+
+Debug Build (for troubleshooting):
+-----------------------------------
+g++ -g -std=c++11 -o inventory.exe main.cpp Inventory.cpp ReportWriter.cpp LowStockAlert.cpp TransactionLogger.cpp
+
+Static Linking (standalone executable):
+-----------------------------------------
+g++ -static -std=c++11 -o inventory.exe main.cpp Inventory.cpp ReportWriter.cpp LowStockAlert.cpp TransactionLogger.cpp
+
+============================================================================
+                        VS CODE SETUP
+============================================================================
+
+If you want to build directly in VS Code:
+
+1. Install C++ extension by Microsoft
+2. Press Ctrl+Shift+D to open Run & Debug
+3. Create launch.json with:
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Build and Run",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/inventory.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "build"
+        }
+    ],
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++11",
+                "-o", "inventory.exe",
+                "main.cpp",
+                "Inventory.cpp",
+                "ReportWriter.cpp",
+                "LowStockAlert.cpp",
+                "TransactionLogger.cpp"
+            ]
+        }
+    ]
+}
+
+Then press F5 to compile and run!
+
+============================================================================
+                    SUCCESS CHECKLIST
+============================================================================
+
+After successful compilation:
+
+✓ inventory.exe created (show file details)
+✓ No compilation errors
+✓ Program starts without errors
+✓ Can add items (test CRUD)
+✓ Can view items
+✓ Reports directory created
+✓ inventory.txt created (after adding item)
+✓ transactions.txt created (after any operation)
+
+============================================================================
+                        NEXT STEPS
+============================================================================
+
+1. Run the program: .\inventory.exe
+2. Test all CRUD operations:
+   - Add a few items
+   - View all items
+   - Search for items
+   - Update quantities
+   - Generate reports
+   - Check low stock alerts
+3. Verify files created:
+   - inventory.txt
+   - transactions.txt
+   - Reports/ folder with generated files
+4. Exit and restart to verify persistence
+5. Submit for college project!
+
+============================================================================
+
+Questions? Refer to README.md for detailed documentation!
+
+Happy coding! 🚀
